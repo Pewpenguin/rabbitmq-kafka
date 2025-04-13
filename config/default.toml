@@ -1,0 +1,10 @@
+# Default configuration for RabbitMQ to Kafka bridge
+
+[rabbitmq]
+uri = "amqp://guest:guest@localhost:5672"
+queue = "messages"
+
+[kafka]
+brokers = "localhost:9092"
+valid_topic = "valid-messages"
+invalid_topic = "unparsed-messages"
