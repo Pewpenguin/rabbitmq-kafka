@@ -17,8 +17,7 @@ pub enum AppError {
     #[error("IO error: {0}")]
     IoError(#[from] std::io::Error),
     
-    #[error("Unknown error: {0}")]
-    UnknownError(String),
+
 }
 
 pub type Result<T> = std::result::Result<T, AppError>;

@@ -38,7 +38,7 @@ impl RabbitMQConsumer {
         info!("Created channel");
         
         // Declare the queue to consume from
-        let queue = channel.queue_declare(
+        let _queue = channel.queue_declare(
             &self.config.queue,
             QueueDeclareOptions::default(),
             FieldTable::default(),
