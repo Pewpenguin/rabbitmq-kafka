@@ -17,7 +17,8 @@ pub enum AppError {
     #[error("IO error: {0}")]
     IoError(#[from] std::io::Error),
     
-
+    #[error("RSM protocol parsing error: {0}")]
+    RsmParsingError(String),
 }
 
 pub type Result<T> = std::result::Result<T, AppError>;
