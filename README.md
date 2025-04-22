@@ -16,6 +16,7 @@ A Rust application that consumes messages from RabbitMQ and forwards them to Kaf
 - Rust (latest stable version)
 - RabbitMQ server
 - Kafka broker
+- CMake 3.5+ (required for rdkafka dependency)
 
 ## Configuration
 
@@ -50,6 +51,8 @@ Environment variables override configuration file settings:
 
 ## Building and Running
 
+### Local Development
+
 ```bash
 # Build the application
 cargo build --release
@@ -63,6 +66,67 @@ CONFIG_PATH=path/to/config cargo run --release
 # Run with environment variables
 APP__RABBITMQ__URI=amqp://user:pass@host:5672 APP__KAFKA__BROKERS=host:9092 cargo run --release
 ```
+
+### Docker Deployment
+
+This project includes a complete Docker setup with:
+
+- RabbitMQ with management UI
+- Kafka and Zookeeper
+- Automatic Kafka topic creation
+- The RabbitMQ to Kafka bridge application
+
+#### Using Docker Compose Directly
+
+```bash
+# Build and start all services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f rabbitmq-kafka-bridge
+
+# Stop all services
+docker-compose down
+```
+
+#### Using Deployment Scripts
+
+For convenience, deployment scripts are provided:
+
+**Linux/macOS (Bash):**
+```bash
+# Make the script executable
+chmod +x docker-deploy.sh
+
+# Start services
+./docker-deploy.sh start
+
+# View logs
+./docker-deploy.sh logs
+
+# Check status
+./docker-deploy.sh status
+
+# Stop services
+./docker-deploy.sh stop
+```
+
+**Windows (PowerShell):**
+```powershell
+# Start services
+.\docker-deploy.ps1 start
+
+# View logs
+.\docker-deploy.ps1 logs
+
+# Check status
+.\docker-deploy.ps1 status
+
+# Stop services
+.\docker-deploy.ps1 stop
+```
+
+The Docker setup automatically ensures CMake 3.5+ is available during the build process.
 
 ## Logging
 
